@@ -15,10 +15,11 @@ private:
 	Color color;
 	CircleShape ball;
 	RenderWindow *window;
+	bool active;
+	Vector2f speed;
 
 public:
 	Ball(RenderWindow & window);
 	Ball(RenderWindow & window, Color color);
-	Ball(RenderWindow & window, Color color, int radius);
-	void draw_ball();
+	void draw();
 };

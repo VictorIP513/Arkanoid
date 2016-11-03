@@ -1,36 +1,42 @@
-#include "..\headers\platform.h"
+#include "platform.h"
 
-
-Platform::Platform(RenderWindow &window) : 
+Platform::Platform(RenderWindow &window) :
 				window(&window),
-				coord((gameWidth + size.x) / 2, gameHeight - 44),
-				size(200, 25),
-				color(Color::Cyan)			
+				coord((gameWidth - platform_standart_x) / 2, gameHeight - platform_standart_y),
+				size((float)platform_standart_x, (float)platform_standart_y),
+				color(get_default_color())
 {}
 
 Platform::Platform(RenderWindow &window, Color color) :
 				window(&window),
 				color(color),
-				coord((gameWidth + size.x) / 2, gameHeight - 44),
-				size(200, 25)
+				coord((gameWidth - platform_standart_x) / 2, gameHeight - platform_standart_y),
+				size((float)platform_standart_x, (float)platform_standart_y)
 {}
 
-Platform::Platform(RenderWindow &window, Color color, Vector2f size) :
-				window(&window),
-				color(color),
-				size(size),
-				coord((gameWidth + size.x) / 2, gameHeight - 44)
-{}
+Color Platform::get_default_color()
+{
+	return Color::Yellow;
+}
 
-void Platform::draw_platform()
+void Platform::platform_move()
+{
+	Vector2i mouse_position = Mouse::getPosition(*window);
+	if (mouse_position.x >= 0 && mouse_position.x <= gameWidth - size.x)
+		coord.x = (float)mouse_position.x;
+	else {
+		if (mouse_position.x < 0)
+			coord.x = 0;
+		else
+			coord.x = gameWidth - size.x;
+	}
+}
+
+void Platform::draw()
 {
 	platform.setPosition(coord);
 	platform.setSize(size);
 	platform.setFillColor(color);
+	platform_move();
 	window->draw(platform);
-	Vector2i q = Mouse::getPosition(*window);
-	coord.x = Mouse::getPosition(*window).x;
-	//(Vector2i)coord = Mouse::getPosition(*window);
-	//std::cout << Mouse::getPosition(*window).x << " " << Mouse::getPosition(*window).y << std::endl;
-	std::cout << coord.x;
 }

@@ -1,23 +1,23 @@
-#include "..\headers\platform.h"
-#include "..\headers\ball.h"
+#include "platform.h"
+#include "ball.h"
 
 using namespace sf;
 
 int main()
 {
-	RenderWindow window(VideoMode(General::gameWidth, General::gameHeight), "Arkanoid", Style::Close);
-	Platform platform(window, Color::Yellow);
-	Ball ball(window, Color::Yellow);
-	while (window.isOpen())
+	RenderWindow *window = new RenderWindow(VideoMode(General::gameWidth, General::gameHeight), "Arkanoid", Style::Close);
+	Platform *platform = new Platform(*window);
+	Ball *ball = new Ball(*window);
+	while (window->isOpen())
 	{
 		Event event;
-		while (window.pollEvent(event))
+		while (window->pollEvent(event))
 			if (event.type == Event::Closed || Keyboard::isKeyPressed(Keyboard::Escape))
-				window.close();
-		window.clear();
-		platform.draw_platform();
-		ball.draw_ball();
-		window.display();
+				window->close();
+		window->clear();
+		platform->draw();
+		ball->draw();
+		window->display();
 	}
 	return 0;
 }
