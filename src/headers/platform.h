@@ -2,8 +2,6 @@
 #define PLATFORM_H
 #include "general.h"
 
-using namespace sf;
-
 class Platform : public General
 {
 private:

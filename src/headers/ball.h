@@ -3,8 +3,6 @@
 #include "general.h"
 #include "platform.h"
 
-using namespace sf;
-
 class Ball : public General
 {
 private:

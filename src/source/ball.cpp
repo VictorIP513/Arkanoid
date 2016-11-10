@@ -1,4 +1,3 @@
-#include "platform.h"
 #include "ball.h"
 #include <iostream>
 
