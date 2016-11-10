@@ -6,8 +6,9 @@ using namespace sf;
 int main()
 {
 	RenderWindow *window = new RenderWindow(VideoMode(General::gameWidth, General::gameHeight), "Arkanoid", Style::Close);
+	//window->setFramerateLimit(300);
 	Platform *platform = new Platform(*window);
-	Ball *ball = new Ball(*window);
+	Ball *ball = new Ball(*window, *platform);
 	while (window->isOpen())
 	{
 		Event event;

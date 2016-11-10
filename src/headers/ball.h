@@ -1,9 +1,7 @@
-#pragma once
-#include <iostream>
-#include <iterator>
-#include <SFML/Graphics.hpp>
+#ifndef BALL_H
+#define BALL_H
 #include "general.h"
-
+#include "platform.h"
 
 using namespace sf;
 
@@ -16,10 +14,26 @@ private:
 	CircleShape ball;
 	RenderWindow *window;
 	bool active;
+	bool speed_counter_reload;
 	Vector2f speed;
+	Platform *platform;
+	Vector2f platform_coord;
+	Vector2f platform_size;
+	const int ball_change_speed = 50000;
 
 public:
-	Ball(RenderWindow & window);
-	Ball(RenderWindow & window, Color color);
-	void draw();
+	Ball(RenderWindow &window, Platform &platform);
+	Ball(RenderWindow &window, Platform &platform, Color color);
+	virtual void draw();
+	Color get_default_color();
+	void ball_active();
+	void ball_noActive();
+	void ball_speed();
+	void ball_boundPlatform();
+	void ball_boundWall();
+	void ball_active_move();
+	void ball_noActive_move();
+	static const int ball_standart_radius = 8;
+	static const int max_ball_speed = 1;
 };
+#endif BALL_H

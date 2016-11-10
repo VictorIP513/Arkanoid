@@ -9,14 +9,24 @@ Platform::Platform(RenderWindow &window) :
 
 Platform::Platform(RenderWindow &window, Color color) :
 				window(&window),
-				color(color),
 				coord((gameWidth - platform_standart_x) / 2, gameHeight - platform_standart_y),
+				color(color),
 				size((float)platform_standart_x, (float)platform_standart_y)
 {}
 
 Color Platform::get_default_color()
 {
 	return Color::Yellow;
+}
+
+Vector2f Platform::get_coord()
+{
+	return coord;
+}
+
+Vector2f Platform::get_size()
+{
+	return size;
 }
 
 void Platform::platform_move()

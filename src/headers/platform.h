@@ -1,26 +1,27 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
-#include <SFML/Graphics.hpp>
 #include "general.h"
 
 using namespace sf;
 
-class Platform: public General
+class Platform : public General
 {
 private:
-	Vector2f coord;
-	Vector2f size;
 	Color color;
 	RectangleShape platform;
 	RenderWindow *window;
-	
+	Vector2f coord;
+	Vector2f size;
+
 public:
 	Platform(RenderWindow &window);
 	Platform(RenderWindow & window, Color color);
-	Color get_default_color();
+	Vector2f get_coord();
+	Vector2f get_size();
+	static Color get_default_color();
+	virtual void draw();
 	void platform_move();
-	void draw();
 	static const int platform_standart_x = 200;
 	static const int platform_standart_y = 20;
 };
-#endif
+#endif PLATFORM_H
