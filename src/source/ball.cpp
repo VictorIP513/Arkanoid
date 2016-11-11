@@ -1,24 +1,26 @@
 #include "ball.h"
 #include <iostream>
 
-Ball::Ball(RenderWindow &window, Platform &platform) :
+Ball::Ball(RenderWindow &window, Platform &platform, Information &information) :
 				window(&window),
 				radius(ball_standart_radius),
 				coord((gameWidth - ball_standart_radius) / 2, 500),
 				color(get_default_color()),
 				active(false),
 				speed(0, 0),
-				platform(&platform)
+				platform(&platform),
+				information(&information)
 {}
 
-Ball::Ball(RenderWindow &window, Platform &platform, Color color) :
+Ball::Ball(RenderWindow &window, Platform &platform, Information &information, Color color) :
 				window(&window),
 				color(color),
 				radius(ball_standart_radius),
 				coord((gameWidth - ball_standart_radius) / 2, 500),
 				active(false),
 				speed(0, 0),
-				platform(&platform)
+				platform(&platform),
+				information(&information)
 {}
 
 Color Ball::get_default_color()
@@ -38,6 +40,7 @@ void Ball::ball_noActive()
 		if ((coord.x < platform_coord.x) || (coord.x > platform_coord.x + platform_size.x)) {
 			active = false;
 			speed_counter_reload = true;
+			information->add_lives(-1);
 		}
 }
 

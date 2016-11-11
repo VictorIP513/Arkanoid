@@ -2,5 +2,5 @@
 
 float General::get_gamespeed()
 {
-	return (float)1 / 20;
+	return (float)1 / 10;
 }

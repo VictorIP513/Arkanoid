@@ -7,7 +7,7 @@ int main()
 	RenderWindow *window = new RenderWindow(VideoMode(General::gameWidth, General::gameHeight), "Arkanoid", Style::Close);
 	Information *information = new Information(*window);
 	Platform *platform = new Platform(*window);
-	Ball *ball = new Ball(*window, *platform);
+	Ball *ball = new Ball(*window, *platform, *information);
 	while (window->isOpen())
 	{
 		Event event;

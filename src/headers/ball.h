@@ -2,6 +2,8 @@
 #define BALL_H
 #include "general.h"
 #include "platform.h"
+#include "information.h"
+#include <cmath>
 
 class Ball : public General
 {
@@ -15,13 +17,14 @@ private:
 	bool speed_counter_reload;
 	Vector2f speed;
 	Platform *platform;
+	Information *information;
 	Vector2f platform_coord;
 	Vector2f platform_size;
 	const int ball_change_speed = 50000;
 
 public:
-	Ball(RenderWindow &window, Platform &platform);
-	Ball(RenderWindow &window, Platform &platform, Color color);
+	Ball(RenderWindow &window, Platform &platform, Information &information);
+	Ball(RenderWindow &window, Platform &platform, Information &information, Color color);
 	static Color get_default_color();
 	virtual void draw();
 	void ball_active();
