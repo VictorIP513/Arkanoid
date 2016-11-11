@@ -73,7 +73,7 @@ void Ball::ball_boundPlatform()
 
 void Ball::ball_boundWall()
 {
-	if (coord.y <= 0)
+	if (coord.y <= window_y_min)
 		speed.y *= -1;
 	if (coord.x < 0 || coord.x + radius * 2 > gameWidth)
 		speed.x *= -1;

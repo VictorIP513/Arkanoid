@@ -22,8 +22,8 @@ private:
 public:
 	Ball(RenderWindow &window, Platform &platform);
 	Ball(RenderWindow &window, Platform &platform, Color color);
+	static Color get_default_color();
 	virtual void draw();
-	Color get_default_color();
 	void ball_active();
 	void ball_noActive();
 	void ball_speed();
