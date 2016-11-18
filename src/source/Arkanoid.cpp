@@ -1,13 +1,15 @@
 #include "platform.h"
 #include "ball.h"
 #include "information.h"
+#include "level.h"
 
 int main()
 {
 	RenderWindow *window = new RenderWindow(VideoMode(General::gameWidth, General::gameHeight), "Arkanoid", Style::Close);
 	Information *information = new Information(*window);
 	Platform *platform = new Platform(*window);
-	Ball *ball = new Ball(*window, *platform, *information);
+	Level *level = new Level(*window);
+	Ball *ball = new Ball(*window, *platform, *information, *level);
 	while (window->isOpen())
 	{
 		Event event;
@@ -17,6 +19,7 @@ int main()
 		window->clear();
 		information->draw();
 		platform->draw();
+		level->draw();
 		ball->draw();
 		window->display();
 	}

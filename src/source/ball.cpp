@@ -1,7 +1,7 @@
 #include "ball.h"
 #include <iostream>
 
-Ball::Ball(RenderWindow &window, Platform &platform, Information &information) :
+Ball::Ball(RenderWindow &window, Platform &platform, Information &information, Level &level) :
 				window(&window),
 				radius(ball_standart_radius),
 				coord((gameWidth - ball_standart_radius) / 2, 500),
@@ -9,10 +9,11 @@ Ball::Ball(RenderWindow &window, Platform &platform, Information &information) :
 				active(false),
 				speed(0, 0),
 				platform(&platform),
-				information(&information)
+				information(&information),
+				level(&level)
 {}
 
-Ball::Ball(RenderWindow &window, Platform &platform, Information &information, Color color) :
+Ball::Ball(RenderWindow &window, Platform &platform, Information &information, Level &level, Color color) :
 				window(&window),
 				color(color),
 				radius(ball_standart_radius),
@@ -20,7 +21,8 @@ Ball::Ball(RenderWindow &window, Platform &platform, Information &information, C
 				active(false),
 				speed(0, 0),
 				platform(&platform),
-				information(&information)
+				information(&information),
+				level(&level)
 {}
 
 Color Ball::get_default_color()
@@ -82,6 +84,29 @@ void Ball::ball_boundWall()
 		speed.x *= -1;
 }
 
+void Ball::ball_boundBrick()
+{
+	for (int i = 0; i < level->get_level_size(); ++i)
+		if ((coord.y < brick_array[i].get_coord().y + brick_array[i].get_size().y) && coord.y > brick_array[i].get_coord().y)
+			if ((coord.x < brick_array[i].get_coord().x + brick_array[i].get_size().x) && coord.x > brick_array[i].get_coord().x)
+				if (brick_array[i].get_draw_status()) {
+					information->add_score(5);
+					brick_array[i].set_hit(-1);
+					if (!brick_array[i].get_hit()) {
+						brick_array[i].set_draw_status(false);
+						information->add_score(2);
+					}
+					if (coord.x + radius * 2 > brick_array[i].get_coord().x + brick_array[i].get_size().x)
+						speed.x *= -1;
+					if (coord.x + radius * 2 < brick_array[i].get_coord().x)
+						speed.x *= -1;
+					if (coord.y + radius * 2 > brick_array[i].get_coord().y + brick_array[i].get_size().y)
+						speed.y *= -1;
+					if (coord.y + radius * 2 < brick_array[i].get_coord().y)
+						speed.y *= -1;
+		}
+}
+
 void Ball::ball_active_move()
 {
 	if (speed.x == 0 && speed.y == 0) {
@@ -107,6 +132,7 @@ void Ball::draw()
 	ball.setFillColor(color);
 	platform_coord = platform->get_coord();
 	platform_size = platform->get_size();
+	brick_array = level->get_brick_array();
 	ball_active();
 	ball_noActive();
 	if (active) {
@@ -114,6 +140,7 @@ void Ball::draw()
 		ball_speed();
 		ball_boundPlatform();
 		ball_boundWall();
+		ball_boundBrick();
 	}
 	else
 		ball_noActive_move();

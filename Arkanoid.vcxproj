@@ -129,7 +129,8 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>SFML_STATIC;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>
+      </PreprocessorDefinitions>
       <PrecompiledHeaderFile />
       <AdditionalIncludeDirectories>$(SolutionDir)thirdparty\include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -139,7 +140,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -168,14 +169,19 @@
   <ItemGroup>
     <ClCompile Include="src\source\Arkanoid.cpp" />
     <ClCompile Include="src\source\ball.cpp" />
+    <ClCompile Include="src\source\brick.cpp" />
     <ClCompile Include="src\source\general.cpp" />
+    <ClCompile Include="src\source\information.cpp" />
+    <ClCompile Include="src\source\level.cpp" />
     <ClCompile Include="src\source\platform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\headers\ball.h" />
+    <ClInclude Include="src\headers\brick.h" />
     <ClInclude Include="src\headers\general.h" />
+    <ClInclude Include="src\headers\information.h" />
+    <ClInclude Include="src\headers\level.h" />
     <ClInclude Include="src\headers\platform.h" />
-    <ClInclude Include="src\headers\targetver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
