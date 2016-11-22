@@ -1,5 +1,4 @@
 #include "ball.h"
-#include <iostream>
 
 Ball::Ball(RenderWindow &window, Platform &platform, Information &information, Level &level) :
 				window(&window),
@@ -66,7 +65,6 @@ void Ball::ball_speed()
 				speed.y -= 1 * get_gamespeed();
 			counter = 0;
 		}
-	//std::cout << "SPEED: " << abs(speed.y) << "  |  " << counter << std::endl;
 }
 
 void Ball::ball_boundPlatform()
@@ -86,9 +84,9 @@ void Ball::ball_boundWall()
 
 void Ball::ball_boundBrick()
 {
-	for (int i = 0; i < level->get_level_size(); ++i)
-		if ((coord.y < brick_array[i].get_coord().y + brick_array[i].get_size().y) && coord.y > brick_array[i].get_coord().y)
-			if ((coord.x < brick_array[i].get_coord().x + brick_array[i].get_size().x) && coord.x > brick_array[i].get_coord().x)
+	for (int i = 0; i < level->get_level_size(); ++i) {
+		if (((coord.y < brick_array[i].get_coord().y + brick_array[i].get_size().y) && (coord.y > brick_array[i].get_coord().y)) || ((coord.y + radius * 2 > brick_array[i].get_coord().y) && (coord.y + radius * 2 < brick_array[i].get_coord().y + brick_array[i].get_size().y)))
+			if (((coord.x + radius * 2 < brick_array[i].get_coord().x + brick_array[i].get_size().x) && coord.x + radius * 2 > brick_array[i].get_coord().x) || ((coord.x < brick_array[i].get_coord().x + brick_array[i].get_size().x) && (coord.x > brick_array[i].get_coord().x))) {
 				if (brick_array[i].get_draw_status()) {
 					information->add_score(5);
 					brick_array[i].set_hit(-1);
@@ -96,15 +94,17 @@ void Ball::ball_boundBrick()
 						brick_array[i].set_draw_status(false);
 						information->add_score(2);
 					}
-					if (coord.x + radius * 2 > brick_array[i].get_coord().x + brick_array[i].get_size().x)
-						speed.x *= -1;
-					if (coord.x + radius * 2 < brick_array[i].get_coord().x)
-						speed.x *= -1;
-					if (coord.y + radius * 2 > brick_array[i].get_coord().y + brick_array[i].get_size().y)
+					if ((coord.y + 2 > brick_array[i].get_coord().y + brick_array[i].get_size().y) || coord.y + radius * 2 - 2 < brick_array[i].get_coord().y)
 						speed.y *= -1;
-					if (coord.y + radius * 2 < brick_array[i].get_coord().y)
-						speed.y *= -1;
-		}
+					else
+						speed.x *= -1;
+				}
+				if (level->level_is_void()) {
+					level->set_level();
+					active = false;
+				}
+			}
+	}
 }
 
 void Ball::ball_active_move()

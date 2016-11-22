@@ -1,8 +1,8 @@
 #include "information.h"
 
-Information::Information(RenderWindow &window) :
+Information::Information(RenderWindow &window, Level &level) :
 				window(&window),
-				level(start_level),
+				level(&level),
 				score(0),
 				lives(start_lives),
 				line_size((float)line_standart_x, (float)line_standart_y),
@@ -12,9 +12,9 @@ Information::Information(RenderWindow &window) :
 	load_fonts();
 }
 
-Information::Information(RenderWindow &window, int lives) :
+Information::Information(RenderWindow &window, Level &level, int lives) :
 				window(&window),
-				level(start_level),
+				level(&level),
 				score(0),
 				lives(lives),
 				line_size((float)line_standart_x, (float)line_standart_y),
@@ -50,11 +50,6 @@ void Information::add_score(int score)
 	this->score += score;
 }
 
-void Information::change_level_text()
-{
-	level++;
-}
-
 void Information::line_draw()
 {
 	line.setPosition(line_coord);
@@ -66,7 +61,7 @@ void Information::line_draw()
 void Information::draw_text_level()
 {
 	text_level.setFont(font);
-	text_level.setString("LEVEL: " + to_string(level));
+	text_level.setString("LEVEL: " + to_string(level->get_current_level()));
 	text_level.setCharacterSize(font_size);
 	text_level.setColor(get_default_font_color());
 	window->draw(text_level);

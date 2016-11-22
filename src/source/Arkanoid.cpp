@@ -6,9 +6,9 @@
 int main()
 {
 	RenderWindow *window = new RenderWindow(VideoMode(General::gameWidth, General::gameHeight), "Arkanoid", Style::Close);
-	Information *information = new Information(*window);
-	Platform *platform = new Platform(*window);
 	Level *level = new Level(*window);
+	Information *information = new Information(*window, *level);
+	Platform *platform = new Platform(*window);
 	Ball *ball = new Ball(*window, *platform, *information, *level);
 	while (window->isOpen())
 	{

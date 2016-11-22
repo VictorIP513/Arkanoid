@@ -1,13 +1,13 @@
 #ifndef INFORMATION_H
 #define INFORMATION_H
 #include "general.h"
+#include "level.h"
 #include <iostream>
 
 class Information : public General
 {
 private:
 	int score;
-	int level;
 	int lives;
 	RenderWindow *window;
 	RectangleShape line;
@@ -18,16 +18,16 @@ private:
 	Text text_score;
 	Text text_level;
 	Text text_lives;
+	Level *level;
 
 public:
-	Information(RenderWindow &window);
-	Information(RenderWindow &window, int lives);
+	Information(RenderWindow &window, Level &level);
+	Information(RenderWindow &window, Level &level, int lives);
 	void load_fonts();
 	static Color get_default_line_color();
 	static Color get_default_font_color();
 	void add_lives(int lives);
 	void add_score(int score);
-	void change_level_text();
 	void line_draw();
 	void draw_text_level();
 	void draw_text_lives();

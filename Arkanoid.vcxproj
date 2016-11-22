@@ -173,6 +173,7 @@
     <ClCompile Include="src\source\general.cpp" />
     <ClCompile Include="src\source\information.cpp" />
     <ClCompile Include="src\source\level.cpp" />
+    <ClCompile Include="src\source\level_constructor.cpp" />
     <ClCompile Include="src\source\platform.cpp" />
   </ItemGroup>
   <ItemGroup>

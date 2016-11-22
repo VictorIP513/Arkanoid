@@ -2,9 +2,26 @@
 
 Level::Level(RenderWindow &window) :
 				current_level(0),
-				window(&window)
+				window(&window),
+				level_size(100),
+				brick_size((float)Brick::brick_standart_x, (float)Brick::brick_standart_y)
 {
 	set_level();
+}
+
+int Level::get_level_size()
+{
+	return level_size;
+}
+
+int Level::get_current_level()
+{
+	return current_level;
+}
+
+Brick* Level::get_brick_array()
+{
+	return brick_array;
 }
 
 void Level::level_reserve_memory()
@@ -21,48 +38,74 @@ void Level::level_delete_memory()
 	operator delete(brick_array);
 }
 
-void Level::level1_constructor()
+void Level::next_level()
 {
-	level_size = 50;
+	if (current_level)
+		level_delete_memory();
+	++current_level;
 	level_reserve_memory();
-	for (int i = 0; i < level_size; ++i) {
-		brick_coord.x = 14 * ((i % 10) + 1) + (float)Brick::brick_standart_x * (i % 10);
-		brick_coord.y = window_y_min + 20 * ((i / 10) + 1) + (float)Brick::brick_standart_y * (i / 10);
-		brick_size.x = Brick::brick_standart_x;
-		brick_size.y = Brick::brick_standart_y;
-		brick_array[i].set_hit(1);
-		brick_array[i].set_draw_status(true);
-		brick_array[i].set_size(brick_size);
-		brick_array[i].set_coord(brick_coord);
-	}
 }
 
 void Level::set_level()
 {
-	if (current_level == 0) {
-		++current_level;
+	next_level();
+	switch (current_level)
+	{
+	case 1: {
 		level1_constructor();
-		return;
+		break;
 	}
-	if (current_level == 1) {
-		level_delete_memory();
-		++current_level;
-		//level2_constructor();
+	case 2: {
+		level2_constructor();
+		break;
+	}
+	case 3: {
+		level3_constructor();
+		break;
+	}
+	case 4: {
+		level4_constructor();
+		break;
+	}
+	case 5: {
+	//	level5_constructor();
+		break;
+	}
+	case 6: {
+	//	level6_constructor();
+		break;
+	}
+	case 7: {
+	//	level7_constructor();
+		break;
+	}
+	case 8: {
+	//	level8_constructor();
+		break;
+	}
+	case 9: {
+	//	level9_constructor();
+		break;
+	}
+	case 10: {
+	//	level10_constructor();
+		break;
+	}
+	default:
+		break;
 	}
 }
 
-int Level::get_level_size()
+bool Level::level_is_void()
 {
-	return level_size;
-}
-
-Brick* Level::get_brick_array()
-{
-	return brick_array;
+	for (int i = 0; i < level_size; ++i)
+		if (brick_array[i].get_hit())
+			return false;
+	return true;
 }
 
 void Level::draw()
 {
 	for (int i = 0; i < level_size; ++i)
-			brick_array[i].draw();
+		brick_array[i].draw();
 }

@@ -17,11 +17,16 @@ public:
 	Level(RenderWindow &window);
 	void level_reserve_memory();
 	void level_delete_memory();
+	void next_level();
 	void level1_constructor();
+	void level2_constructor();
+	void level3_constructor();
+	void level4_constructor();
 	void set_level();
+	bool level_is_void();
 	int get_level_size();
+	int get_current_level();
 	Brick* get_brick_array();
 	virtual void draw();
-	const int level_max_bricks = 50;
 };
 #endif LEVEL_H
