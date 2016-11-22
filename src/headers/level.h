@@ -22,6 +22,12 @@ public:
 	void level2_constructor();
 	void level3_constructor();
 	void level4_constructor();
+	void level5_constructor();
+	void level6_constructor();
+	void level7_constructor();
+	void level8_constructor();
+	void level9_constructor();
+	void level10_constructor();
 	void set_level();
 	bool level_is_void();
 	int get_level_size();

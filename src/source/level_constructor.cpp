@@ -63,3 +63,33 @@ void Level::level4_constructor()
 		brick_array[i].set_coord(brick_coord);
 	}
 }
+
+void Level::level5_constructor()
+{
+
+}
+
+void Level::level6_constructor()
+{
+
+}
+
+void Level::level7_constructor()
+{
+
+}
+
+void Level::level8_constructor()
+{
+
+}
+
+void Level::level9_constructor()
+{
+
+}
+
+void Level::level10_constructor()
+{
+
+}

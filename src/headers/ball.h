@@ -23,7 +23,7 @@ private:
 	Vector2f platform_coord;
 	Vector2f platform_size;
 	Brick *brick_array;
-	const int ball_change_speed = 50000;
+	const int ball_change_speed = 3000;
 
 public:
 	Ball(RenderWindow &window, Platform &platform, Information &information, Level &level);

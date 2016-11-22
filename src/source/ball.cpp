@@ -37,8 +37,9 @@ void Ball::ball_active()
 
 void Ball::ball_noActive()
 {
-	if (coord.y + radius * 2 > platform_coord.y)
+	if (coord.y + radius * 2 > platform_coord.y + 0.5)
 		if ((coord.x < platform_coord.x) || (coord.x > platform_coord.x + platform_size.x)) {
+			system("pause");
 			active = false;
 			speed_counter_reload = true;
 			information->add_lives(-1);
@@ -56,22 +57,33 @@ void Ball::ball_speed()
 	if ((abs(speed.y) < max_ball_speed) && (abs(speed.x) < max_ball_speed))
 		if (counter > ball_change_speed) {
 			if (speed.x > 0)
-				speed.x += 1 * get_gamespeed();
+				speed.x += 0.05 * get_gamespeed();
 			else
-				speed.x -= 1 * get_gamespeed();
+				speed.x -= 0.05 * get_gamespeed();
 			if (speed.y > 0)
-				speed.y += 1 * get_gamespeed();
+				speed.y += 0.05 * get_gamespeed();
 			else
-				speed.y -= 1 * get_gamespeed();
+				speed.y -= 0.05 * get_gamespeed();
 			counter = 0;
 		}
 }
 
 void Ball::ball_boundPlatform()
 {
-	if (coord.y + radius * 2 > platform_coord.y)
-		if (coord.x > platform_coord.x && coord.x < platform_coord.x + platform_size.x)
-			speed.y *= -1;
+	if (coord.y + radius * 2 > platform_coord.y) {
+		if (coord.x + radius * 2 > platform_coord.x && coord.x - radius * 2 < platform_coord.x + platform_size.x) {
+			if (coord.x < platform_coord.x + (platform_size.x) / 10 && speed.x > 0) {
+				speed.x *= -1;
+				speed.y *= -1;
+			}
+			else if (coord.x > platform_coord.x + platform_size.x - (platform_size.x) / 10 && speed.x < 0) {
+				speed.x *= -1;
+				speed.y *= -1;
+			}
+			else
+				speed.y *= -1;
+		}
+	}	
 }
 
 void Ball::ball_boundWall()

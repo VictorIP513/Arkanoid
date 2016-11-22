@@ -68,27 +68,27 @@ void Level::set_level()
 		break;
 	}
 	case 5: {
-	//	level5_constructor();
+		level5_constructor();
 		break;
 	}
 	case 6: {
-	//	level6_constructor();
+		level6_constructor();
 		break;
 	}
 	case 7: {
-	//	level7_constructor();
+		level7_constructor();
 		break;
 	}
 	case 8: {
-	//	level8_constructor();
+		level8_constructor();
 		break;
 	}
 	case 9: {
-	//	level9_constructor();
+		level9_constructor();
 		break;
 	}
 	case 10: {
-	//	level10_constructor();
+		level10_constructor();
 		break;
 	}
 	default:
